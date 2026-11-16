@@ -28,8 +28,8 @@ Dark industrial styling, highly customizable properties, AOT friendly, with rend
 | AOT / trimming | `IsAotCompatible`, no reflection, dynamic types or runtime serialization; compiled XAML bindings |
 | Cross-platform | Windows / Linux / macOS (all desktop platforms supported by Avalonia 12) |
 
-> This project is an independent implementation. Only the interaction and visual concept of "industrial gauges" were inspired by
-> community projects such as RRQMSkin. No third-party source code, images or assets were copied; all drawing code, API design
+> This project is an independent implementation. Only the interaction and visual concept of "industrial gauges" were inspired
+> community projects such. No third-party source code, images or assets were copied; all drawing code, API design
 > and colors are original.
 
 ---
@@ -475,10 +475,6 @@ it stops immediately when disabled or detached.
 **Q9: Can the controls be used in bulk inside `ItemsControl` / `DataTemplate`?**
 Yes. The controls have no template or child visual tree, and value updates only redraw themselves. Still, avoid hundreds
 of gauges in a single `DataTemplate`.
-
-**Q10: How do I migrate from WPF examples such as RRQMSkin?**
-This project is not a source port; the API follows Avalonia conventions. Recreate the visual layout ("range bands + needle +
-center text") using `Ranges`, `NeedleShape`, `ValueOffset` and friends.
 
 ---
 
