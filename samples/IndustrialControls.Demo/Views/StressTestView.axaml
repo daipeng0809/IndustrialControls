@@ -1,0 +1,88 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ic="https://github.com/daipeng0809/IndustrialControls"
+             x:Class="IndustrialControls.Demo.Views.StressTestView">
+
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Spacing="16" Margin="2,14,10,2">
+
+      <Border Classes="card">
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="20">
+          <StackPanel Spacing="6">
+            <TextBlock Classes="cardTitle" Text="高频数据压力测试" />
+            <TextBlock Classes="caption"
+                       Text="后台线程以约 6,000 次/秒的频率直接写入 12 个控件。InstrumentBase 会自动把刷新合并到渲染帧：即使写入量远高于刷新率，UI 线程也不会被事件淹没。" />
+            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,6,0,0">
+              <Border Classes="chip"><TextBlock x:Name="WritesText" Text="控件写入 0 次/秒" /></Border>
+              <Border Classes="chip"><TextBlock x:Name="HeartbeatText" Text="UI 心跳 10 次/秒" /></Border>
+              <Border Classes="chip"><TextBlock Text="6 × Gauge · 3 × SectorProgressBar · 3 × VerticalProgressBar" /></Border>
+            </StackPanel>
+          </StackPanel>
+          <ToggleButton x:Name="RunToggle" Grid.Column="1" Classes="run" Content="开始压测"
+                        VerticalAlignment="Center" />
+        </Grid>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="4">
+          <TextBlock Classes="cardTitle" Text="仪表盘阵列" />
+          <WrapPanel Margin="0,6,0,0">
+            <ic:Gauge x:Name="G1" Classes="stress" Width="196" Height="206" Margin="4"
+                      Title="温度" Unit="℃" ProgressBrush="{StaticResource AmberRedBrush}" />
+            <ic:Gauge x:Name="G2" Classes="stress" Width="196" Height="206" Margin="4"
+                      Title="湿度" Unit="%RH" ProgressBrush="{StaticResource TealGreenBrush}" />
+            <ic:Gauge x:Name="G3" Classes="stress" Width="196" Height="206" Margin="4"
+                      Title="风速" Unit="m/s" ProgressBrush="{StaticResource CyanVioletBrush}" />
+            <ic:Gauge x:Name="G4" Classes="stress" Width="196" Height="206" Margin="4"
+                      Title="压力" Unit="kPa" ProgressBrush="{StaticResource VioletPinkBrush}" />
+            <ic:Gauge x:Name="G5" Classes="stress" Width="196" Height="206" Margin="4"
+                      Title="流量" Unit="L/min" ProgressBrush="{StaticResource TealGreenBrush}" />
+            <ic:Gauge x:Name="G6" Classes="stress" Width="196" Height="206" Margin="4"
+                      Title="电压" Unit="V" ProgressBrush="{StaticResource AmberRedBrush}" />
+          </WrapPanel>
+        </StackPanel>
+      </Border>
+
+      <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+        <Border Classes="card">
+          <StackPanel Spacing="4">
+            <TextBlock Classes="cardTitle" Text="扇形进度条" />
+            <Grid ColumnDefinitions="*,*,*" Height="220" Margin="0,6,0,0">
+              <ic:SectorProgressBar x:Name="S1" Classes="stress" Height="210" Label="负载 A"
+                                    ProgressBrush="{StaticResource CyanVioletBrush}" />
+              <ic:SectorProgressBar x:Name="S2" Grid.Column="1" Classes="stress" Height="210" Label="负载 B"
+                                    ProgressBrush="{StaticResource TealGreenBrush}" />
+              <ic:SectorProgressBar x:Name="S3" Grid.Column="2" Classes="stress" Height="210" Label="负载 C"
+                                    ProgressBrush="{StaticResource VioletPinkBrush}" />
+            </Grid>
+          </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1" Classes="card">
+          <StackPanel Spacing="4">
+            <TextBlock Classes="cardTitle" Text="竖向进度条" />
+            <Grid ColumnDefinitions="*,*,*" Height="240" Margin="0,6,0,0">
+              <ic:VerticalProgressBar x:Name="V1" Classes="stress" Width="70" Height="230"
+                                      HorizontalAlignment="Center" Unit="%"
+                                      ProgressBrush="{StaticResource LevelGradientBrush}" />
+              <ic:VerticalProgressBar x:Name="V2" Grid.Column="1" Classes="stress" Width="70" Height="230"
+                                      HorizontalAlignment="Center" Unit="%" SegmentCount="10"
+                                      ProgressBrush="{StaticResource TealGreenBrush}" />
+              <ic:VerticalProgressBar x:Name="V3" Grid.Column="2" Classes="stress" Width="70" Height="230"
+                                      HorizontalAlignment="Center" Unit="%"
+                                      ProgressBrush="{StaticResource AmberRedBrush}" />
+            </Grid>
+          </StackPanel>
+        </Border>
+      </Grid>
+
+      <Border Classes="card">
+        <StackPanel Spacing="4">
+          <TextBlock Classes="cardTitle" Text="说明" />
+          <TextBlock Classes="caption" TextWrapping="Wrap"
+                     Text="• 每个控件的静态部分（刻度、刻度文字、色带）只构建一次并缓存；数值变化时只重绘指针或进度弧。&#10;• 后台线程写入 Value 是安全的：控件最多投递一个待处理的刷新请求，下一次渲染读取最新值。&#10;• 若把同样的数据量直接 Post 到 UI 线程，队列会持续膨胀，UI 心跳明显下降。可对比观察心跳与写入速率。" />
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

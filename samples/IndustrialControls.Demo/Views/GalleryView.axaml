@@ -1,0 +1,196 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:IndustrialControls.Demo.ViewModels"
+             xmlns:ic="https://github.com/daipeng0809/IndustrialControls"
+             x:Class="IndustrialControls.Demo.Views.GalleryView"
+             x:DataType="vm:MainViewModel">
+
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Spacing="16" Margin="2,14,10,2">
+
+      <!-- 交互式自定义 -->
+      <Border Classes="card">
+        <Grid ColumnDefinitions="360,*" ColumnSpacing="24">
+          <ic:Gauge Width="340"
+                    Height="320"
+                    Value="{Binding DemoValue, Mode=OneWay}"
+                    Minimum="0"
+                    Maximum="100"
+                    Title="可调仪表盘"
+                    Unit="kPa"
+                    StartAngle="{Binding DemoStartAngle}"
+                    SweepAngle="{Binding DemoSweepAngle}"
+                    TrackThickness="{Binding DemoTrackThickness}"
+                    NeedleLength="{Binding DemoNeedleLength}"
+                    ValueFormat="F0"
+                    ProgressBrush="{StaticResource CyanVioletBrush}"
+                    NeedleBrush="#F8FAFC"
+                    MajorTickCount="11">
+            <ic:Gauge.Ranges>
+              <ic:GaugeRange From="0" To="60" Brush="#34D399" />
+              <ic:GaugeRange From="60" To="85" Brush="#FBBF24" />
+              <ic:GaugeRange From="85" To="100" Brush="#F87171" />
+            </ic:Gauge.Ranges>
+          </ic:Gauge>
+
+          <StackPanel Grid.Column="1" Spacing="10" VerticalAlignment="Center">
+            <StackPanel Spacing="2">
+              <TextBlock Classes="cardTitle" Text="实时调整仪表盘" />
+              <TextBlock Classes="caption" Text="所有属性都是可绑定、可样式化的 Avalonia 属性；调整后立即重绘。" />
+            </StackPanel>
+
+            <Grid ColumnDefinitions="110,*,46" ColumnSpacing="10">
+              <TextBlock Classes="caption" Text="数值 Value" VerticalAlignment="Center" />
+              <Slider Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding DemoValue}" />
+              <TextBlock Grid.Column="2" Classes="caption" VerticalAlignment="Center"
+                         Text="{Binding DemoValue, StringFormat='{}{0:F0}'}" />
+            </Grid>
+
+            <Grid ColumnDefinitions="110,*,46" ColumnSpacing="10">
+              <TextBlock Classes="caption" Text="起始角" VerticalAlignment="Center" />
+              <Slider Grid.Column="1" Minimum="-90" Maximum="270" Value="{Binding DemoStartAngle}" />
+              <TextBlock Grid.Column="2" Classes="caption" VerticalAlignment="Center"
+                         Text="{Binding DemoStartAngle, StringFormat='{}{0:F0}°'}" />
+            </Grid>
+
+            <Grid ColumnDefinitions="110,*,46" ColumnSpacing="10">
+              <TextBlock Classes="caption" Text="扫过角" VerticalAlignment="Center" />
+              <Slider Grid.Column="1" Minimum="30" Maximum="360" Value="{Binding DemoSweepAngle}" />
+              <TextBlock Grid.Column="2" Classes="caption" VerticalAlignment="Center"
+                         Text="{Binding DemoSweepAngle, StringFormat='{}{0:F0}°'}" />
+            </Grid>
+
+            <Grid ColumnDefinitions="110,*,46" ColumnSpacing="10">
+              <TextBlock Classes="caption" Text="轨道粗度" VerticalAlignment="Center" />
+              <Slider Grid.Column="1" Minimum="2" Maximum="30" Value="{Binding DemoTrackThickness}" />
+              <TextBlock Grid.Column="2" Classes="caption" VerticalAlignment="Center"
+                         Text="{Binding DemoTrackThickness, StringFormat='{}{0:F0}'}" />
+            </Grid>
+
+            <Grid ColumnDefinitions="110,*,46" ColumnSpacing="10">
+              <TextBlock Classes="caption" Text="指针长度" VerticalAlignment="Center" />
+              <Slider Grid.Column="1" Minimum="0.2" Maximum="1" Value="{Binding DemoNeedleLength}" />
+              <TextBlock Grid.Column="2" Classes="caption" VerticalAlignment="Center"
+                         Text="{Binding DemoNeedleLength, StringFormat='{}{0:F2}'}" />
+            </Grid>
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- 指针形状 -->
+      <Border Classes="card">
+        <StackPanel Spacing="6">
+          <TextBlock Classes="cardTitle" Text="指针形状 NeedleShape" />
+          <TextBlock Classes="caption" Text="Line / Triangle / Tapered，可分别设置长度、宽度、颜色与轴心。" />
+          <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8" Margin="0,6,0,0">
+            <ic:Gauge Height="250" Value="64" Title="Line" Unit="A" NeedleShape="Line"
+                      NeedleWidth="9" NeedleLength="0.66" NeedleBrush="#22D3EE"
+                      ProgressBrush="{StaticResource CyanVioletBrush}" MajorTickCount="9" TrackBrush="#15243A" />
+            <ic:Gauge Grid.Column="1" Height="250" Value="64" Title="Triangle" Unit="A" NeedleShape="Triangle"
+                      NeedleWidth="12" NeedleLength="0.9" NeedleBrush="#FBBF24"
+                      ProgressBrush="{StaticResource AmberRedBrush}" MajorTickCount="9" TrackBrush="#15243A" />
+            <ic:Gauge Grid.Column="2" Height="250" Value="64" Title="Tapered" Unit="A" NeedleShape="Tapered"
+                      NeedleWidth="7" NeedleLength="0.88" NeedleBrush="#F8FAFC"
+                      ProgressBrush="{StaticResource VioletPinkBrush}" MajorTickCount="9" TrackBrush="#15243A" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <WrapPanel>
+        <!-- 扇形进度条 -->
+        <Border Classes="card" Width="330" Margin="0,0,16,16">
+          <StackPanel Spacing="8">
+            <TextBlock Classes="cardTitle" Text="扇形进度条 · 270°" />
+            <TextBlock Classes="caption" Text="SectorProgressBar · 渐变 + 柔光 + 圆角端点" />
+            <ic:SectorProgressBar Height="230" Minimum="0" Maximum="100" Value="68"
+                                  Label="CPU 负载" Thickness="16"
+                                  StartAngle="135" SweepAngle="270"
+                                  ProgressBrush="{StaticResource CyanVioletBrush}"
+                                  TrackBrush="#15243A" />
+          </StackPanel>
+        </Border>
+
+        <Border Classes="card" Width="330" Margin="0,0,16,16">
+          <StackPanel Spacing="8">
+            <TextBlock Classes="cardTitle" Text="环形进度条 · 360°" />
+            <TextBlock Classes="caption" Text="SectorProgressBar · 整圆 + 紫色渐变" />
+            <ic:SectorProgressBar Height="230" Minimum="0" Maximum="100" Value="42"
+                                  Label="磁盘使用" Thickness="16"
+                                  StartAngle="-90" SweepAngle="360"
+                                  ProgressBrush="{StaticResource VioletPinkBrush}"
+                                  TrackBrush="#182238" />
+          </StackPanel>
+        </Border>
+
+        <!-- 竖向进度条 -->
+        <Border Classes="card" Width="330" Margin="0,0,16,16">
+          <StackPanel Spacing="8">
+            <TextBlock Classes="cardTitle" Text="竖向进度条" />
+            <TextBlock Classes="caption" Text="VerticalProgressBar · 连续填充 + 右侧刻度" />
+            <Grid ColumnDefinitions="*,*" Height="236">
+              <ic:VerticalProgressBar Width="80" Height="226" HorizontalAlignment="Center"
+                                      Minimum="0" Maximum="100" Value="72" Unit="%"
+                                      ShowScale="True" BarWidth="26" CornerRadius="10"
+                                      ProgressBrush="{StaticResource LevelGradientBrush}"
+                                      TrackBrush="#15243A" />
+              <ic:VerticalProgressBar Grid.Column="1" Width="80" Height="226" HorizontalAlignment="Center"
+                                      Minimum="0" Maximum="100" Value="55" Unit="%"
+                                      SegmentCount="12" SegmentGap="4" BarWidth="26" CornerRadius="6"
+                                      ProgressBrush="{StaticResource TealGreenBrush}"
+                                      TrackBrush="#15243A" />
+            </Grid>
+          </StackPanel>
+        </Border>
+
+        <!-- 电池 -->
+        <Border Classes="card" Width="330" Margin="0,0,16,16">
+          <StackPanel Spacing="12">
+            <TextBlock Classes="cardTitle" Text="电池电量" />
+            <TextBlock Classes="caption" Text="BatteryIndicator · 低电量/危险色 + 充电标识" />
+            <StackPanel Spacing="4">
+              <TextBlock Classes="caption" Text="正常 · 82%" />
+              <ic:BatteryIndicator Height="52" Value="82" IsCharging="True"
+                                   FillBrush="{StaticResource BatteryGradientBrush}" />
+            </StackPanel>
+            <StackPanel Spacing="4">
+              <TextBlock Classes="caption" Text="低电量 · 24%" />
+              <ic:BatteryIndicator Height="52" Value="24" />
+            </StackPanel>
+            <StackPanel Spacing="4">
+              <TextBlock Classes="caption" Text="危险 · 8%" />
+              <ic:BatteryIndicator Height="52" Value="8" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+        <!-- 指南针 -->
+        <Border Classes="card" Width="330" Margin="0,0,16,16">
+          <StackPanel Spacing="6">
+            <TextBlock Classes="cardTitle" Text="指南针 · 英文方位" />
+            <TextBlock Classes="caption" Text="Compass · Value = 航向角（0° 正北）" />
+            <ic:Compass Height="238" Value="225" UseChineseCardinalLabels="False"
+                        DialBrush="{StaticResource CompassDialBrush}"
+                        BezelBrush="#A78BFA" BezelThickness="2"
+                        NeedleBrush="#F472B6" SouthNeedleBrush="#94A3B8"
+                        HeadingFontSize="22" HeadingOffset="0,36" DirectionOffset="0,62" />
+          </StackPanel>
+        </Border>
+
+        <!-- 状态灯 -->
+        <Border Classes="card" Width="330" Margin="0,0,16,16">
+          <StackPanel Spacing="8">
+            <TextBlock Classes="cardTitle" Text="设备状态灯" />
+            <TextBlock Classes="caption" Text="StatusLight · 常亮 / 呼吸 / 关闭" />
+            <StackPanel Spacing="12" Margin="0,10,0,0">
+              <ic:StatusLight Status="Normal" Label="运行中 · 呼吸灯" IsPulsing="True" />
+              <ic:StatusLight Status="Warning" Label="警告 · 常亮" />
+              <ic:StatusLight Status="Alarm" Label="告警 · 呼吸灯" IsPulsing="True" />
+              <ic:StatusLight Status="Maintenance" Label="维护 · 常亮" />
+              <ic:StatusLight Status="Off" Label="停机" ShowHalo="False" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+      </WrapPanel>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

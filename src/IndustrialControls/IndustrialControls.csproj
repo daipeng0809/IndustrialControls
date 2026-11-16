@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>IndustrialControls</RootNamespace>
+    <AssemblyName>IndustrialControls</AssemblyName>
+
+    <!-- Avalonia 12 官方推荐开启编译绑定；本库不依赖反射，可直接在 AOT 宿主中使用 -->
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <IsAotCompatible>true</IsAotCompatible>
+    <IsTrimmable>true</IsTrimmable>
+
+    <Version>1.0.0</Version>
+    <Authors>daipeng0809</Authors>
+    <Description>面向 Avalonia 12 的工业控件库：仪表盘、扇形进度条、竖向进度条、电池电量、指南针、状态灯等，支持高度自定义、AOT 与高帧率数据刷新。</Description>
+    <PackageId>IndustrialControls.Avalonia</PackageId>
+    <PackageTags>avalonia;avalonia12;controls;gauge;dashboard;industrial;compass;progressbar;aot</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.en.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/daipeng0809/IndustrialControls</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/daipeng0809/IndustrialControls</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\README.en.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" Condition="Exists('..\..\assets\icon.png')" />
+  </ItemGroup>
+
+</Project>

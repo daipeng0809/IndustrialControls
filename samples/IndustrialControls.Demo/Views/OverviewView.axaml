@@ -1,0 +1,215 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:IndustrialControls.Demo.ViewModels"
+             xmlns:ic="https://github.com/daipeng0809/IndustrialControls"
+             x:Class="IndustrialControls.Demo.Views.OverviewView"
+             x:DataType="vm:MainViewModel">
+
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Spacing="16" Margin="2,14,10,2">
+
+      <!-- 关键指标 -->
+      <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="16">
+        <Border Classes="card">
+          <StackPanel Spacing="6">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Ellipse Width="8" Height="8" Fill="#22D3EE" VerticalAlignment="Center" />
+              <TextBlock Classes="caption" Text="温度 · 1# 车间" />
+            </StackPanel>
+            <TextBlock Classes="metric" Text="{Binding Temperature, StringFormat='{}{0:F1} ℃'}" />
+            <TextBlock Classes="caption" Text="正常范围 18 ~ 27 ℃" />
+          </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1" Classes="card">
+          <StackPanel Spacing="6">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Ellipse Width="8" Height="8" Fill="#34D399" VerticalAlignment="Center" />
+              <TextBlock Classes="caption" Text="湿度 · 1# 车间" />
+            </StackPanel>
+            <TextBlock Classes="metric" Text="{Binding Humidity, StringFormat='{}{0:F0} %RH'}" />
+            <TextBlock Classes="caption" Text="目标区间 40 ~ 65 %RH" />
+          </StackPanel>
+        </Border>
+
+        <Border Grid.Column="2" Classes="card">
+          <StackPanel Spacing="6">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Ellipse Width="8" Height="8" Fill="#A78BFA" VerticalAlignment="Center" />
+              <TextBlock Classes="caption" Text="风速 · 塔顶" />
+            </StackPanel>
+            <TextBlock Classes="metric" Text="{Binding WindSpeed, StringFormat='{}{0:F1} m/s'}" />
+            <TextBlock Classes="caption" Text="三杯式风速仪 · 2.5 Hz" />
+          </StackPanel>
+        </Border>
+
+        <Border Grid.Column="3" Classes="card">
+          <StackPanel Spacing="6">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Ellipse Width="8" Height="8" Fill="#FBBF24" VerticalAlignment="Center" />
+              <TextBlock Classes="caption" Text="大气压 · 站房" />
+            </StackPanel>
+            <TextBlock Classes="metric" Text="{Binding Pressure, StringFormat='{}{0:F1} kPa'}" />
+            <TextBlock Classes="caption" Text="本地气压计 · 已校准" />
+          </StackPanel>
+        </Border>
+      </Grid>
+
+      <!-- 仪表盘 -->
+      <Grid ColumnDefinitions="*,*,*" ColumnSpacing="16">
+        <Border Classes="card">
+          <Grid RowDefinitions="Auto,*" RowSpacing="4">
+            <StackPanel Spacing="2">
+              <TextBlock Classes="cardTitle" Text="环境温度" />
+              <TextBlock Classes="caption" Text="Gauge · 彩色分区 + 渐变进度弧" />
+            </StackPanel>
+            <ic:Gauge Grid.Row="1"
+                      Height="250"
+                      Minimum="0"
+                      Maximum="40"
+                      Value="{Binding Temperature, Mode=OneWay}"
+                      Title="温度"
+                      Unit="℃"
+                      ValueFormat="F1"
+                      ProgressBrush="{StaticResource AmberRedBrush}"
+                      NeedleBrush="#F8FAFC"
+                      NeedleWidth="5"
+                      MajorTickCount="9"
+                      MinorTicksPerMajor="3"
+                      TrackBrush="#15243A">
+              <ic:Gauge.Ranges>
+                <ic:GaugeRange From="0" To="16" Brush="#60A5FA" />
+                <ic:GaugeRange From="16" To="27" Brush="#34D399" />
+                <ic:GaugeRange From="27" To="40" Brush="#F87171" />
+              </ic:Gauge.Ranges>
+            </ic:Gauge>
+          </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Classes="card">
+          <Grid RowDefinitions="Auto,*" RowSpacing="4">
+            <StackPanel Spacing="2">
+              <TextBlock Classes="cardTitle" Text="相对湿度" />
+              <TextBlock Classes="caption" Text="Gauge · 线形指针 + 粗轨道" />
+            </StackPanel>
+            <ic:Gauge Grid.Row="1"
+                      Height="250"
+                      Minimum="0"
+                      Maximum="100"
+                      Value="{Binding Humidity, Mode=OneWay}"
+                      Title="湿度"
+                      Unit="%RH"
+                      ValueFormat="F0"
+                      ValueOffset="0,30"
+                      UnitOffset="0,62"
+                      TrackThickness="14"
+                      ProgressBrush="{StaticResource TealGreenBrush}"
+                      NeedleShape="Line"
+                      NeedleWidth="9"
+                      NeedleLength="0.64"
+                      NeedleBrush="#2DD4BF"
+                      NeedleHubRadius="11"
+                      MajorTickCount="6"
+                      MinorTicksPerMajor="4"
+                      TrackBrush="#13243A">
+            </ic:Gauge>
+          </Grid>
+        </Border>
+
+        <Border Grid.Column="2" Classes="card">
+          <Grid RowDefinitions="Auto,*" RowSpacing="4">
+            <StackPanel Spacing="2">
+              <TextBlock Classes="cardTitle" Text="风速" />
+              <TextBlock Classes="caption" Text="Gauge · 三角形指针 + 量程分区" />
+            </StackPanel>
+            <ic:Gauge Grid.Row="1"
+                      Height="250"
+                      Minimum="0"
+                      Maximum="20"
+                      Value="{Binding WindSpeed, Mode=OneWay}"
+                      Title="风速"
+                      Unit="m/s"
+                      ValueFormat="F1"
+                      ProgressBrush="{StaticResource CyanVioletBrush}"
+                      NeedleShape="Triangle"
+                      NeedleWidth="9"
+                      NeedleLength="0.9"
+                      NeedleBrush="#FBBF24"
+                      MajorTickCount="5"
+                      MinorTicksPerMajor="4"
+                      TrackBrush="#15243A">
+              <ic:Gauge.Ranges>
+                <ic:GaugeRange From="0" To="5" Brush="#34D399" />
+                <ic:GaugeRange From="5" To="10" Brush="#FBBF24" />
+                <ic:GaugeRange From="10" To="20" Brush="#F87171" />
+              </ic:Gauge.Ranges>
+            </ic:Gauge>
+          </Grid>
+        </Border>
+      </Grid>
+
+      <!-- 指南针 / 电池 / 状态灯 -->
+      <Grid ColumnDefinitions="1.15*,*" ColumnSpacing="16">
+        <Border Classes="card">
+          <Grid RowDefinitions="Auto,*" RowSpacing="6">
+            <StackPanel Spacing="2">
+              <TextBlock Classes="cardTitle" Text="风向 · 指南针" />
+              <TextBlock Classes="caption" Text="Compass · 中文方位 · 0° 为正北，顺时针" />
+            </StackPanel>
+            <ic:Compass Grid.Row="1"
+                        Width="248"
+                        Height="248"
+                        HorizontalAlignment="Center"
+                        Value="{Binding WindDirection, Mode=OneWay}"
+                        UseChineseCardinalLabels="True"
+                        DialBrush="{StaticResource CompassDialBrush}"
+                        BezelBrush="#22D3EE"
+                        BezelThickness="2"
+                        MajorTickBrush="#CBD5E1"
+                        MinorTickBrush="#475569"
+                        NeedleBrush="#F87171"
+                        SouthNeedleBrush="#94A3B8"
+                        NeedleWidth="7"
+                        NeedleLength="0.66"
+                        HeadingFontSize="24"
+                        HeadingOffset="0,38"
+                        DirectionOffset="0,64" />
+          </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Classes="card">
+          <Grid RowDefinitions="Auto,Auto,*" RowSpacing="14">
+            <StackPanel Spacing="2">
+              <TextBlock Classes="cardTitle" Text="设备电量与状态" />
+              <TextBlock Classes="caption" Text="BatteryIndicator / StatusLight · 支持呼吸灯" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Spacing="8">
+              <ic:BatteryIndicator Width="230"
+                                   Height="58"
+                                   HorizontalAlignment="Left"
+                                   Value="{Binding BatteryLevel, Mode=OneWay}"
+                                   IsCharging="{Binding IsCharging}"
+                                   FillBrush="{StaticResource BatteryGradientBrush}"
+                                   LowThreshold="0.25"
+                                   CriticalThreshold="0.1" />
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <Border Classes="chip"><TextBlock Text="电量低于 25% 自动转为琥珀色" /></Border>
+                <Border Classes="chip" IsVisible="{Binding IsCharging}"><TextBlock Text="充电中" /></Border>
+              </StackPanel>
+            </StackPanel>
+
+            <Grid Grid.Row="2" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                  RowSpacing="12" VerticalAlignment="Center">
+              <ic:StatusLight Grid.Row="0" Status="Normal" Label="1# 空压机 · 运行中" IsPulsing="True" />
+              <ic:StatusLight Grid.Row="1" Status="Warning" Label="2# 水泵 · 振动偏高" />
+              <ic:StatusLight Grid.Row="2" Status="Alarm" Label="3# 冷却塔 · 温度告警" IsPulsing="True" />
+              <ic:StatusLight Grid.Row="3" Status="Maintenance" Label="4# 变频器 · 维护模式" />
+              <ic:StatusLight Grid.Row="4" Status="Off" Label="5# 备用机组 · 已停机" />
+            </Grid>
+          </Grid>
+        </Border>
+      </Grid>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

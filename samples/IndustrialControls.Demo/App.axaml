@@ -1,0 +1,158 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ic="https://github.com/daipeng0809/IndustrialControls"
+             x:Class="IndustrialControls.Demo.App"
+             RequestedThemeVariant="Dark">
+
+  <Application.Resources>
+    <ResourceDictionary>
+      <Color x:Key="SystemAccentColor">#22D3EE</Color>
+
+      <LinearGradientBrush x:Key="WindowBackgroundBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Color="#07101D" Offset="0" />
+        <GradientStop Color="#0B1A2E" Offset="0.55" />
+        <GradientStop Color="#08131F" Offset="1" />
+      </LinearGradientBrush>
+
+      <SolidColorBrush x:Key="CardBackgroundBrush" Color="#0E1B2E" />
+      <SolidColorBrush x:Key="CardBorderBrush" Color="#1B3352" />
+      <SolidColorBrush x:Key="ChipBackgroundBrush" Color="#13263F" />
+      <SolidColorBrush x:Key="TextPrimaryBrush" Color="#F1F5F9" />
+      <SolidColorBrush x:Key="TextSecondaryBrush" Color="#8FA3BF" />
+      <SolidColorBrush x:Key="AccentBrush" Color="#22D3EE" />
+      <SolidColorBrush x:Key="AccentDimBrush" Color="#0E7490" />
+      <SolidColorBrush x:Key="CompassDialBrush" Color="#0C1A2D" />
+
+      <LinearGradientBrush x:Key="CyanVioletBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Color="#22D3EE" Offset="0" />
+        <GradientStop Color="#6366F1" Offset="1" />
+      </LinearGradientBrush>
+
+      <LinearGradientBrush x:Key="TealGreenBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Color="#2DD4BF" Offset="0" />
+        <GradientStop Color="#34D399" Offset="1" />
+      </LinearGradientBrush>
+
+      <LinearGradientBrush x:Key="AmberRedBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Color="#FBBF24" Offset="0" />
+        <GradientStop Color="#F87171" Offset="1" />
+      </LinearGradientBrush>
+
+      <LinearGradientBrush x:Key="VioletPinkBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Color="#A78BFA" Offset="0" />
+        <GradientStop Color="#F472B6" Offset="1" />
+      </LinearGradientBrush>
+
+      <LinearGradientBrush x:Key="BatteryGradientBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Color="#34D399" Offset="0" />
+        <GradientStop Color="#22D3EE" Offset="1" />
+      </LinearGradientBrush>
+
+      <LinearGradientBrush x:Key="LevelGradientBrush" StartPoint="0%,0%" EndPoint="0%,100%">
+        <GradientStop Color="#22D3EE" Offset="0" />
+        <GradientStop Color="#6366F1" Offset="1" />
+      </LinearGradientBrush>
+    </ResourceDictionary>
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme />
+
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="{StaticResource CardBackgroundBrush}" />
+      <Setter Property="BorderBrush" Value="{StaticResource CardBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="16" />
+      <Setter Property="Padding" Value="18" />
+    </Style>
+
+    <Style Selector="TextBlock.h1">
+      <Setter Property="FontSize" Value="24" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="TextBlock.cardTitle">
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.metric">
+      <Setter Property="FontSize" Value="28" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.caption">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}" />
+    </Style>
+
+    <Style Selector="Border.chip">
+      <Setter Property="Background" Value="{StaticResource ChipBackgroundBrush}" />
+      <Setter Property="CornerRadius" Value="20" />
+      <Setter Property="Padding" Value="10,4" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Border.chip TextBlock">
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}" />
+    </Style>
+
+    <Style Selector="TabControl">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style Selector="TabItem">
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="MinHeight" Value="42" />
+      <Setter Property="Padding" Value="18,8" />
+      <Setter Property="Margin" Value="0,0,6,0" />
+      <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}" />
+    </Style>
+
+    <Style Selector="TabItem:selected">
+      <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
+    </Style>
+
+    <Style Selector="ToggleButton.run">
+      <Setter Property="Padding" Value="18,8" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <!-- 压力测试页使用的小型仪表样式 -->
+    <Style Selector="ic|Gauge.stress">
+      <Setter Property="TrackThickness" Value="8" />
+      <Setter Property="MajorTickCount" Value="7" />
+      <Setter Property="ScaleLabelFontSize" Value="9" />
+      <Setter Property="ScaleLabelOffset" Value="5" />
+      <Setter Property="MajorTickLength" Value="8" />
+      <Setter Property="MinorTickLength" Value="4" />
+      <Setter Property="MinorTicksPerMajor" Value="2" />
+      <Setter Property="TitleFontSize" Value="11" />
+      <Setter Property="ValueFontSize" Value="19" />
+      <Setter Property="UnitFontSize" Value="10" />
+      <Setter Property="NeedleWidth" Value="5" />
+      <Setter Property="NeedleHubRadius" Value="6" />
+      <Setter Property="TrackBrush" Value="#15243A" />
+    </Style>
+
+    <Style Selector="ic|SectorProgressBar.stress">
+      <Setter Property="Thickness" Value="9" />
+      <Setter Property="ProgressGlow" Value="False" />
+      <Setter Property="ValueFontSize" Value="18" />
+      <Setter Property="LabelFontSize" Value="10" />
+    </Style>
+
+    <Style Selector="ic|VerticalProgressBar.stress">
+      <Setter Property="BarWidth" Value="16" />
+      <Setter Property="ValueFontSize" Value="14" />
+      <Setter Property="ShowScale" Value="False" />
+    </Style>
+  </Application.Styles>
+</Application>
