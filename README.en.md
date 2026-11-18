@@ -36,9 +36,13 @@ Dark industrial styling, highly customizable properties, AOT friendly, with rend
 
 ## 2. Requirements
 
-- Avalonia **12.1.6** or later
+- Avalonia **12.1.1** or later (the NuGet dependency floor is pinned to 12.1.1, so any Avalonia 12 version from 12.1.1 up works as-is)
 - .NET **8.0** or later (the library targets `net8.0` and can be consumed by net8 / net9 / net10 hosts)
 - Desktop platforms: Windows / Linux / macOS
+
+> **Version compatibility**: the package depends on **Avalonia 12.1.1**, the lowest usable version in that line. NuGet treats a
+> plain `PackageReference` version as a *minimum*, so hosts pinned to 12.1.1, 12.1.6, 12.2.x or any other Avalonia 12 release
+> need no extra configuration; NuGet only resolves the 12.1.1 dependency when the host is older than that.
 
 ---
 
@@ -47,7 +51,7 @@ Dark industrial styling, highly customizable properties, AOT friendly, with rend
 ### 3.1 NuGet
 
 ```bash
-dotnet add package IndustrialControls.Avalonia --version 1.0.0
+dotnet add package IndustrialControls.Avalonia --version 1.0.1
 ```
 
 ### 3.2 Project reference
@@ -400,7 +404,7 @@ AOT requires the platform C++ toolchain (on Windows, the "Desktop development wi
 dotnet pack src/IndustrialControls/IndustrialControls.csproj -c Release -o artifacts
 
 # Push to nuget.org
-dotnet nuget push artifacts/IndustrialControls.Avalonia.1.0.0.nupkg \
+dotnet nuget push artifacts/IndustrialControls.Avalonia.1.0.1.nupkg \
   --api-key <YOUR_API_KEY> \
   --source https://api.nuget.org/v3/index.json
 ```

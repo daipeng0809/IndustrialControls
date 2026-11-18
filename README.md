@@ -35,9 +35,13 @@
 
 ## 2. 环境要求
 
-- Avalonia **12.1.6** 及以上
+- Avalonia **12.1.1** 及以上（NuGet 依赖下限固定为 12.1.1，从 12.1.1 起的任意 Avalonia 12 版本均可直接使用）
 - .NET **8.0** 及以上（库的目标框架为 `net8.0`，可被 net8 / net9 / net10 的宿主引用）
 - 桌面平台：Windows / Linux / macOS
+
+> **版本兼容说明**：包对 `Avalonia` 的依赖取 **12.1.1**（最低可用版本）。NuGet 中该依赖表示“最小版本”，
+> 因此引用方使用 12.1.1、12.1.6、12.2.x 等任意 Avalonia 12 版本时都无需额外配置；只有在宿主 Avalonia
+> 低于 12.1.1 时 NuGet 才会将依赖还原到 12.1.1。
 
 ---
 
@@ -46,7 +50,7 @@
 ### 3.1 NuGet
 
 ```bash
-dotnet add package IndustrialControls.Avalonia --version 1.0.0
+dotnet add package IndustrialControls.Avalonia --version 1.0.1
 ```
 
 ### 3.2 项目引用
@@ -397,7 +401,7 @@ AOT 需要对应平台的 C++ 工具链（Windows 上需要 Visual Studio 的 �
 dotnet pack src/IndustrialControls/IndustrialControls.csproj -c Release -o artifacts
 
 # 推送到 nuget.org
-dotnet nuget push artifacts/IndustrialControls.Avalonia.1.0.0.nupkg \
+dotnet nuget push artifacts/IndustrialControls.Avalonia.1.0.1.nupkg \
   --api-key <YOUR_API_KEY> \
   --source https://api.nuget.org/v3/index.json
 ```

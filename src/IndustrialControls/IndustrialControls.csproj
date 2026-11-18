@@ -13,7 +13,7 @@
     <IsAotCompatible>true</IsAotCompatible>
     <IsTrimmable>true</IsTrimmable>
 
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>daipeng0809</Authors>
     <Description>面向 Avalonia 12 的工业控件库：仪表盘、扇形进度条、竖向进度条、电池电量、指南针、状态灯等，支持高度自定义、AOT 与高帧率数据刷新。</Description>
     <PackageId>IndustrialControls.Avalonia</PackageId>
@@ -31,7 +31,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="12.1.6" />
+    <!-- 依赖下限固定为 12.1.1：NuGet 依赖为“最小版本”，引用方从 12.1.1 起的任意 Avalonia 12 版本均可使用 -->
+    <PackageReference Include="Avalonia" Version="12.1.1" />
   </ItemGroup>
 
   <ItemGroup>
